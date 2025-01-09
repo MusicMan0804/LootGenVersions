@@ -6,9 +6,11 @@ const medium = 50;
 const small = 10; 
 const worthless = 5;
 
-const raresClassic = [ "Death Mask", "Gold Sandals", "Ruler's chestplate", "Ruler's Saddle", "Alexandrite", "Black Pearl", "Topaz (Transp Yellow)", "Gold Dragon Comb", "Jeweled Bottle Stopper", "Gold Crown", "Orichalcum"];
+let curLoot = ""
 
-const hugesClassic = ["Chalace",  "Diamond", "Emerald", "Amethyst", "Ivory Game Set", "Cobra Diadem", "Marble Idol", "Gold Brooch", "Obsidion Idol", "Pearl Necklace", "Gold Music Box", "Platinum Bracelet", "Platinum Anklet"];
+const raresClassic = [ "Death Mask", "Gold Sandals", "Ruler's chestplate", "Ruler's Saddle", "Alexandrite (Transp Purple)", "Black Pearl", "Topaz (Transp Yellow)", "Gold Dragon Comb", "Jeweled Bottle Stopper", "Gold Crown", "Orichalcum"];
+
+const hugesClassic = ["Chalace",  "Diamond", "Emerald", "Amethyst", "Ivory Game Set", "Cobra Diadem", "Marble Idol", "Gold Brooch", "Obsidian Idol", "Pearl Necklace", "Gold Music Box", "Platinum Bracelet", "Platinum Anklet"];
 
 const largesClassic = ["Garnet (Transp Red)", "Aquamarine (Transp Teal)", "Peridot (Transp Olive)", "Tourmaline (Transp Pink)", "Boat Model", "Gold Necklace", 
 "Gold Ring", "Gold armband", "Gold Diadem", "Amber", "Chrysoberyl (Transp Yellow)", "Coral", "Jade", "Pearl", "Spinel (Transl Red)", "Gold Anklet"];
@@ -18,7 +20,7 @@ const mediumsClassic = ["Gold Plated Dagger",  "Mahogany Box", "Ivory Game Pawn"
  "Stone Relief", "Silver Anklet", "Wooden Game Set"];
 
 const smallsClassic =["Wooden Game Pawn", "Bronze Sword", "Folded Cloak","Stone Statue", "Gladiators Helmet", "Carving of Charioteer", "Hammer", "Water Skin", "Padlock", "Pole", "Cookpot", "Wooden Statue", 
-"Clay Statue","Chalice", "Lizard", "Rope", "Wine Bottle", "Azurite (Opaque Blue)", "Agate (Transl Brown)", "Hematite (Opaque Grey)", "Malachite (Opaque Green)", "Lapis Lazuli (Blue)", "Obsidion",
+"Clay Statue","Chalice", "Lizard", "Rope", "Wine Bottle", "Azurite (Opaque Blue)", "Agate (Transl Brown)", "Hematite (Opaque Grey)", "Malachite (Opaque Green)", "Lapis Lazuli (Blue)", "Obsidian",
  "Rhodochrosite (Opaque Pink)", "Box of Turqoise Figures", "Hempen Rope", "Bronze Ring", "Tinderbox", "Bound Book", "Iron Anklet"]; 
 
 const worthlessesClassic = ["Amphora", "Piton", "Fishhook", "Pewter Lizard", "Pretty Rock",  "Rags", "Icosahedral Die", "Key",
@@ -34,6 +36,7 @@ let genBtn = document.getElementById('generate');
 let chooseBtn = document.getElementById('choose');
 let gNumber = document.getElementById('goldAmount');
 let treasure = document.getElementById("treasure");
+let downloadBtn = document.getElementById("down");
 
 subBtn.addEventListener('click', function() {
     main(gNumber.value);
@@ -41,27 +44,32 @@ subBtn.addEventListener('click', function() {
 
 chooseBtn.addEventListener('click', function() {
     generate(0, true);
-})
+});
 
 genBtn.addEventListener('click', function() {
     generate(gNumber.value, "");
 });
 
+downloadBtn.addEventListener('click', function() {
+    download();
+});
 
 function main(gold) {
     event.preventDefault();
     document.getElementById("goldAmount").value = "";
     console.log("Main function called");
     if (gold < 0 || gold > 10000) {
-        treasure.innerHTML = 'Invalid #!<br>(x > 0 and x <10000)';
+        treasure.innerHTML = 'Invalid #!<br>(Valid Range: x > 0 and x <10000)';
     } else {
         let arr = [];
         let itemNum = calcItems(gold)
         arr = getItems(itemNum);
         let str =  "Total: " + gold + "<br>";
+        //stringify arr
         for (let i = 0; i < arr.length; i++) {
             str += arr[i] +"<br>";
         }
+        curLoot = str;
         treasure.innerHTML = str;
     }
 }
@@ -82,13 +90,14 @@ function generate(cap, autoCap) {
 
         main(sug);
     } else {
-    cap+
+        cap+
         main(Math.floor(Math.random() * cap));
     }
     
 }
 
-
+//This function uses a change algorithm to figure out how many items of each tier are needed
+//val is the gold value
 function calcItems(val) {
     let rareNum = 0;
     let hugeNum = 0;
@@ -133,6 +142,8 @@ function calcItems(val) {
 
     nums[6] = rem; //bag of remaining gold
 
+    //Deprecated
+    //decided against magic items, please remove 
     rand = Math.floor(Math.random() * 1000);
     if (rand == 43) {
         nums[7] = 1;
@@ -166,6 +177,7 @@ function getItems(arr) {
     let resArr = [];
 
     //splits 
+    //these have a random chance to split one item into two lower items of a lower tier
     let split = 0;
     for (let i = 0; i < rareNum; i++) {
         split = Math.floor(Math.random() * 100);
@@ -255,8 +267,22 @@ function getItems(arr) {
             j++;
         }
     }
-
+    //last index is change 
     resArr[j] = "Loose Coins: " + goldNum;
     return resArr;
+}
+function download() {
+    console.log("Attempting download")
+    if(curLoot != "") {
+        console.log("curloot is not null it is in fact" + curLoot)
+        let element = document.createElement('a')
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(curLoot));
+        element.setAttribute('download', "loot.html");
 
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+
+        document.body.removeChild(element);
+    }
 }
