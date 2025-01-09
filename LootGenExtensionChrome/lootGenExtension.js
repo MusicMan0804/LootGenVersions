@@ -8,27 +8,35 @@ const worthless = 5;
 
 let curLoot = ""
 
-const raresClassic = [ "Death Mask", "Gold Sandals", "Ruler's chestplate", "Ruler's Saddle", "Alexandrite (Transp Purple)", "Black Pearl", "Topaz (Transp Yellow)", "Gold Dragon Comb", "Jeweled Bottle Stopper", "Gold Crown", "Orichalcum"];
+const raresClassic = [ "Death Mask", "Gold Sandals", "Ruler's chestplate", "Ruler's Saddle", "Alexandrite (Transp Purple)", "Black Pearl", "Topaz (Transp Yellow)", "Gold Dragon Comb", "Jeweled Bottle Stopper", "Gold Crown", "Orichalcum"
+    ,"Large Embroidered Tapestry", "Ruby Scepter", "Saphire Amulet", "Jeweled Dagger", "Mysterious Egg"
+];
 
-const hugesClassic = ["Chalace",  "Diamond", "Emerald", "Amethyst", "Ivory Game Set", "Cobra Diadem", "Marble Idol", "Gold Brooch", "Obsidian Idol", "Pearl Necklace", "Gold Music Box", "Platinum Bracelet", "Platinum Anklet"];
+const hugesClassic = ["Chalace",  "Diamond", "Emerald", "Amethyst", "Ivory Game Set", "Cobra Diadem", "Marble Idol", "Gold Brooch", "Obsidian Idol", "Pearl Necklace", "Gold Music Box", 
+    "Platinum Bracelet", "Platinum Anklet", "Golden Helmet", "Golden Harp"];
 
 const largesClassic = ["Garnet (Transp Red)", "Aquamarine (Transp Teal)", "Peridot (Transp Olive)", "Tourmaline (Transp Pink)", "Boat Model", "Gold Necklace", 
-"Gold Ring", "Gold armband", "Gold Diadem", "Amber", "Chrysoberyl (Transp Yellow)", "Coral", "Jade", "Pearl", "Spinel (Transl Red)", "Gold Anklet"];
+"Gold Ring", "Gold armband", "Gold Diadem", "Amber", "Chrysoberyl (Transp Yellow)", "Coral", "Jade", "Pearl", "Spinel (Transl Red)", "Gold Anklet", "Clockwork Contraption", "Gold Ingot", "Gold Brooch",
+"Crystal Ball", "Gold Censer", "Silk Cloak", "Silver Goblet"];
 
 const mediumsClassic = ["Gold Plated Dagger",  "Mahogany Box", "Ivory Game Pawn", "Silver Necklace", "Silver Ring", "Silver armband", "Silver Diadem", "Bloodstone (Opaque Grey)", "Carnelian (Opaque Orange)",
 "Chalcedony (Opaque White)", "Chrysoprase (Transl Green", "Citrine (Transl Yellow)", "Jasper (Opaque Blue)", "Moonstone (Transl White Blue)", "Onyx", "Quartz", "Sardonyx (Opaque Red)", "Zircon (Transl Green)",
- "Stone Relief", "Silver Anklet", "Wooden Game Set"];
+ "Stone Relief", "Silver Anklet", "Wooden Game Set", "String Instrument", "Flute", "Bronze Mirror", "Enamel Brooch", "Gold Earring", "Porcelain Statuette", "Wooden Puzzle Box", "Amber Pendant", "Jade Pendant",
+  "Velvet Cloak", "Brass Compass", "Turquoise (Opaque Blue-Green)", "Brass Spyglass", "Potion Vial", "Velvet Pouch", "Silver Hairpin", "Silver Dagger",];
 
 const smallsClassic =["Wooden Game Pawn", "Bronze Sword", "Folded Cloak","Stone Statue", "Gladiators Helmet", "Carving of Charioteer", "Hammer", "Water Skin", "Padlock", "Pole", "Cookpot", "Wooden Statue", 
 "Clay Statue","Chalice", "Lizard", "Rope", "Wine Bottle", "Azurite (Opaque Blue)", "Agate (Transl Brown)", "Hematite (Opaque Grey)", "Malachite (Opaque Green)", "Lapis Lazuli (Blue)", "Obsidian",
- "Rhodochrosite (Opaque Pink)", "Box of Turqoise Figures", "Hempen Rope", "Bronze Ring", "Tinderbox", "Bound Book", "Iron Anklet"]; 
+ "Rhodochrosite (Opaque Pink)", "Box of Turqoise Figures", "Hempen Rope", "Bronze Ring", "Tinderbox", "Bound Book", "Iron Anklet", "Egg", "Iron Dagger", "Leather Strips", "Private Note", "Wooden Soldier Toy", 
+ "Crystal Prism",
+"Jade Shard", "Obsidian Shard", "Brass Candle Holder", "Iron Sundial", "Ancient Coin", "Leather Satchel", "Hatchet", "Iron Ladle", "Large Cast Iron Pot", "Bundle of Firewood", "Fish", "Old Map", "Iron Lantern"]; 
 
 const worthlessesClassic = ["Amphora", "Piton", "Fishhook", "Pewter Lizard", "Pretty Rock",  "Rags", "Icosahedral Die", "Key",
 "Iron Ring", "Iron Chain", "Clay Bowl", "Sandal", "Clay Cup", "Horse Shoe", "Folded Robe",  
 "Jug", "Wax Tablet", "Sack", "Small Wheel", "Pulley", "Crab", "String", "Net", "Wooden Game Sticks or Dice", 
 "Blank Scroll", "Bone Statuette", "Game Knuckles", "Brass Mug", "Leather Pouch", "Water Skin", "Boot", "Clay Dish", 
 "Loaf of Bread", "Olive Oil Bottle", "Arrow", "Belt", "Folded Tunic", "Bottle", "Jar", "Glove", "Wooden Spoon", 
-"Eating Utensils", "Iron Pot", "Iron Pan", "Wooden Rod", "Pen", "Charcoal"];
+"Eating Utensils", "Iron Pot", "Iron Pan", "Wooden Rod", "Pen", "Charcoal", "Wooden Sword", "Feather", "Stone", "Glass Bottle (Empty)", "Sack (Empty)", "Rusty Axe", "Rusty Nail"];
+
 
 
 let subBtn = document.getElementById('submit');
