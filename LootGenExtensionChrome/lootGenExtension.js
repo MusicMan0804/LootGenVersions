@@ -65,12 +65,12 @@ downloadBtn.addEventListener('click', function() {
 function main(gold) {
     event.preventDefault();
     document.getElementById("goldAmount").value = "";
-    console.log("Main function called");
+    console.log("Main function called with gold " + gold);
     if (gold < 0 || gold > 10000) {
         treasure.innerHTML = 'Invalid #!<br>(Valid Range: x > 0 and x <10000)';
     } else {
         let arr = [];
-        let itemNum = calcItems(gold)
+        let itemNum = calcItems(gold) //how many items is equivalent to this gold amount 
         arr = getItems(itemNum);
         let str =  "Total: " + gold + "<br>";
         //stringify arr
@@ -82,6 +82,7 @@ function main(gold) {
     }
 }
 
+//This is for ballpark or choose for me, if autocap true: choose for me, else use the passed in cap
 function generate(cap, autoCap) {
     console.log("Suggest called got " +autoCap);
     event.preventDefault();
@@ -163,7 +164,7 @@ function calcItems(val) {
     }
 
     
-
+    
     return nums;
     
 
@@ -225,7 +226,7 @@ function getItems(arr) {
         for (let i = 0; i < rareNum; i++) {
             index = Math.floor(Math.random() * raresClassic.length);
             let item = raresClassic[index];
-            resArr[j] = item + "-400";
+            resArr[j] = item + "-500";
             j++;
         }
     }
